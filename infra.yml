@@ -1,0 +1,13 @@
+---
+- hosts: p50
+  tasks:
+    - import_role:
+        name: karmab.kcli-modules
+    - name: Create a vm
+      kvirt_vm:
+        name: foss
+        state: present
+        profile: rhel7.5_x86_64.qcow2
+        parameters:
+         memory: 2048
+
