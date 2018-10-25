@@ -21,7 +21,7 @@
     path: "/root/break"
   register: stat_result
 
-- name: "[RHFORUM][BREAK] Check if everything is ok"
-  debug:
-    msg: "Failure. Please check the break status"
-  failed_when: stat_result.stat.exists == false
+#- name: "[RHFORUM][BREAK] Check if everything is ok"
+#  debug:
+#    msg: "Failure. Please check the break status"
+#  failed_when: stat_result.stat.exists == false
