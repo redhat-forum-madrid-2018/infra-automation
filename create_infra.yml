@@ -1,14 +1,19 @@
 ---
-- hosts: p50
+- hosts: localhost
   remote_user: root
   tasks:
     - import_role:
         name: karmab.kcli-modules
     - name: Create a vm
       kvirt_vm:
-        name: foss
+        name: foss4
         state: present
         profile: rhel7.5_x86_64.qcow2
         parameters:
          memory: 2048
-
+         nets:
+          - name: br0
+            ip: 192.168.1.100
+            mask: 255.255.255.0
+            gateway: 192.168.1.1
+            dns: 8.8.8.8

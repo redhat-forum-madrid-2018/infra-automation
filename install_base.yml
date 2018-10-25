@@ -1,0 +1,9 @@
+---
+
+- name: "[RHFORUM][BASE] Install & Config base SW"
+  hosts: vms
+  remote_user: root
+  vars_files:
+    - vault/vault.yml
+  roles:
+    - { role: base }

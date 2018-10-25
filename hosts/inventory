@@ -1,0 +1,45 @@
+[p50]
+server.redhatforummad.com ansible_host=192.168.1.90
+
+[laptop]
+laptop1.redhatforummad.com ansible_host=192.168.1.91
+laptop2.redhatforummad.com ansible_host=192.168.1.92
+laptop3.redhatforummad.com ansible_host=192.168.1.93
+
+[tower]
+tower.redhatforummad.com ansible_host=192.168.1.95
+
+[repos]
+repos.redhatforummad.com ansible_host=192.168.1.94
+
+[gitlab]
+gitlab.redhatforummad.com ansible_host=192.168.1.96
+
+[ceph]
+cephinfra.redhatforummad.com ansible_host=192.168.1.120
+ceph1.redhatforummad.com ansible_host=192.168.1.121
+ceph2.redhatforummad.com ansible_host=192.168.1.122
+ceph3.redhatforummad.com ansible_host=192.168.1.123
+
+[cicd]
+cicd.redhatforummad.com ansible_host=192.168.1.140
+
+[appdev]
+appdev.redhatforummad.com ansible_host=192.168.1.160
+
+[vms:children]
+tower
+repos
+gitlab
+ceph
+cicd
+appdev
+
+[common:children]
+tower
+repos
+git
+
+[host:children]
+p50
+laptop
