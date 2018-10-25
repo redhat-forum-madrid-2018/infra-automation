@@ -3,3 +3,6 @@ cdn_pool: "8a85f98260c27fc50160c323247e39e0"
 repository: cdn
 nameserver: "8.8.8.8"
 dns_search: "redhatforummad.com"
+
+lab: cicd
+check_break: "/root/break"

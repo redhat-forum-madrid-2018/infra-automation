@@ -1,4 +1,4 @@
-[p50]
+[server]
 server.redhatforummad.com ansible_host=192.168.1.90
 
 [laptop]
@@ -38,8 +38,8 @@ appdev
 [common:children]
 tower
 repos
-git
+gitlab
 
 [host:children]
-p50
+server
 laptop

@@ -1,0 +1,27 @@
+---
+
+- name: "[RHFORUM][BREAK] Breaking the awesome Lab at Red Hat Forum Madrid 2018"
+  shell: "virsh snapshot-revert --domain {{ item }} --snapshotname break"
+  with_items: "{{ lab }}"
+
+- name: "[RHFORUM][BREAK] Starting the breaked Lab. Good luck"
+  virt:
+    name: "{{ item }}"
+    state: running
+  with_items: "{{ lab }}"
+
+
+- name: "[RHFORUM][BREAK] Waiting to the connection of the SSH"
+  wait_for_connection:
+    delay: 10
+    timeout: 60
+
+- name: "[RHFORUM][BREAK] Check if break worked"
+  stat:
+    path: "/root/break"
+  register: stat_result
+
+- name: "[RHFORUM][BREAK] Check if everything is ok"
+  debug:
+    msg: "Failure. Please check the break status"
+  failed_when: stat_result.stat.exists == false
