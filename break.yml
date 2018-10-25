@@ -1,7 +1,7 @@
 ---
 
 - name: "[RHFORUM][BREAK] Starting the break of the lab"
-  hosts: all
+  hosts: server
   remote_user: root
   roles:
     - { role: break }
