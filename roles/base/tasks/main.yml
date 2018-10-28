@@ -25,31 +25,37 @@
     dest: "/etc/resolv.conf"
     backup: yes
 
-- name: "[RHFORUM][BASE] Register to the CDN"
-  redhat_subscription:
-    state: present
-    username: "{{ cdn_user }}"
-    password: "{{ cdn_password }}"
-    pool_ids: "{{ cdn_pool }}"
-  when: "'{{ repository }}' == 'cdn'"
+    #- name: "[RHFORUM][BASE] Register to the CDN"
+    #  redhat_subscription:
+    #    state: present
+    #    username: "{{ cdn_user }}"
+    #    password: "{{ cdn_password }}"
+    #    pool_ids: "{{ cdn_pool }}"
+    #  when: "'{{ repository }}' == 'cdn'"
+    #
+    #- name: "[RHFORUM][BASE] Disable all RHSM repositories"
+    #  rhsm_repository:
+    #    name: "*"
+    #    state: disabled
+    #
+    #- name: "[RHFORUM][BASE] Enable a RHSM repository"
+    #  rhsm_repository:
+    #    name: "{{ item }}"
+    #  with_items:
+    #    - rhel-7-server-rpms
+    #    - rhel-7-server-extras-rpms
+    #    - rhel-7-server-rhceph-3-tools-rpms
+    #    - rhel-7-server-rh-common-rpms
+    #    - rhel-7-server-ose-3.11-rpms
+    #    - rhel-7-server-ansible-2.6-rpms
 
-- name: "[RHFORUM][BASE] Disable all RHSM repositories"
-  rhsm_repository:
-    name: "*"
-    state: disabled
+- name: "[RHFORUM][BASE] configure repo"
+  template:
+    src: "templates/local.repo.j2"
+    dest: "/etc/yum.repos.d/local.repo"
+    backup: yes
 
-- name: "[RHFORUM][BASE] Enable a RHSM repository"
-  rhsm_repository:
-    name: "{{ item }}"
-  with_items:
-    - rhel-7-server-rpms
-    - rhel-7-server-extras-rpms
-    - rhel-7-server-rhceph-3-tools-rpms
-    - rhel-7-server-rh-common-rpms
-    - rhel-7-server-ose-3.11-rpms
-    - rhel-7-server-ansible-2.6-rpms
-
-- name: "[RHFORUM][BASE] Enable a RHSM repository"
+- name: "[RHFORUM][BASE] Install base software"
   yum:
     name: "{{ item }}"
     state: latest
